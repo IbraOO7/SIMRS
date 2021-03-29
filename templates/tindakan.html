@@ -1,0 +1,78 @@
+{% extends 'index.html' %}
+    
+    {% block body %}
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+      <br /><br />
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><b> + Tambah Tindakan</b></button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Tambah Pasien</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ url_for('tambahtindakan') }}" method="POST">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Nama Tindakan:</label>
+                <input type="text" class="form-control" id="recipient-name" name="tindak" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Harga:</label>
+                <input type="text" class="form-control" id="recipient-name" name="harga" required>
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Keterangan:</label>
+                <input type="text" class="form-control" id="recipient-name" name="keterangan" required>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Keluar</button>
+            <button type="submit" class="btn btn-primary">Tambah</button>
+          </div>
+         </form>
+        </div>
+      </div>
+    </div>
+    <br><br />
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Data Table Example</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id="example" class="table table-bordered table-sm" width="100%">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Jenis Tindakan</th>
+                    <th>Harga</th>
+                    <th>Keterangan</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in containers %}
+                  <tr>
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.tindak }}</td>
+                    <td>{{ "Rp.{:,}".format(data.harga) }}</td>
+                    <td>{{ data.keterangan }}</td>
+                    <td><a class="btn btn-primary btn-sm" href="/edittindakan/{{data.id}}">Edit<a> <a class="btn btn-danger btn-sm" href="/hapustindakan/{{data.id}}">Hapus<a></td>
+                  </tr>
+				{% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        {% include "footer.html" %}
+       {% endblock %}

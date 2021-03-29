@@ -1,0 +1,167 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+<div id="content-wrapper">
+
+      <div class="container-fluid">
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><b>+</b> <b>Tambah Dokter</b></button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Dokter</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url_for('tambahdokter') }}" method="POST">
+         <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Nama:</label>
+            <input type="text" class="form-control" id="recipient-name" name="nama" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="message-text" class="col-form-label">Alamat:</label>
+            <textarea class="form-control" id="message-text" name="alamat" required></textarea>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">No.Telepon:</label>
+            <input type="text" class="form-control" id="recipient-name" name="nohp" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Spesialis:</label>
+            <input type="text" class="form-control" id="recipient-name" name="spesialis" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="message-text" class="col-form-label">Jadwal:</label>
+            <textarea class="form-control" id="message-text" name="jadwal" required></textarea>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Biaya Dokter:</label>
+            <input type="text" class="form-control" id="recipient-name" name="biaya" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Keterangan:</label>
+            <input type="text" class="form-control" id="recipient-name" name="keterangan" required>
+          </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+        <button type="submit" class="btn btn-primary">Tambah</button>
+      </div>
+     </form>
+    </div>
+  </div>
+</div>
+<br /><br />
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Data Dokter</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered" id="example" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Alamat</th>
+                    <th>No.Telepon</th>
+                    <th>Spesialis</th>
+                    <th>Jadwal</th>
+                    <th>Biaya Dokter</th>
+                    <th>Keterangan</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in containers %}
+                  <tr>
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.nama }}</td>
+                    <td>{{ data.alamat }}</td>
+                    <td>{{ data.noHP }}</td>
+                    <td>{{ data.spesialis }}</td>
+                    <td>{{ data.jadwal }}</td>
+                    <td>{{ data.biaya }}</td>
+                    <td>{{ data.keterangan }}</td>
+                    <td>
+						<a class="btn btn-sm btn-primary" href="#" data-toggle="modal" data-target="#id{{ data.id }}" data-whatever="@getbootstrap" >Edit</a>
+                        <div class="modal fade" id="id{{ data.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Dokter</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form action="/editdokter/{{ data.id }}" method="POST">
+                                 <div class="form-row">
+                                  <div class="form-group col-md-6">
+                                    <label for="recipient-name" class="col-form-label">Nama:</label>
+                                    <input type="text" class="form-control" value="{{ data.nama }}" id="recipient-name" name="nama" required>
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="recipient-name" class="col-form-label">Alamat:</label>
+                                    <input type="text" class="form-control" value="{{ data.alamat }}" id="recipient-name" name="alamat" required>
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="recipient-name" class="col-form-label">No.Telepon:</label>
+                                    <input type="text" class="form-control" value="{{ data.noHP }}" id="recipient-name" name="nohp" required>
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="recipient-name" class="col-form-label">Spesialis:</label>
+                                    <input type="text" class="form-control" value="{{ data.spesialis }}" id="recipient-name" name="spesialis" required>
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="message-text" class="col-form-label">Jadwal:</label>
+                                    <textarea class="form-control" id="message-text" value="{{ data.jadwal }}" name="jadwal" required></textarea>
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="recipient-name" class="col-form-label">Keterangan:</label>
+                                    <input type="text" class="form-control" value="{{ data.keterangan }}" id="recipient-name" name="keterangan" required>
+                                  </div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+                                <button type="submit" class="btn btn-primary">Tambah</button>
+                              </div>
+                             </form>
+                            </div>
+                          </div>
+                        </div>
+						<a class="btn btn-sm btn-danger" href="/hapusdokter/{{data.id}}">Hapus</a>
+				   </td>
+                  </tr>
+			   {% endfor %}
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © Your Website 2019</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+{% endblock %}

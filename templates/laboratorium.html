@@ -1,0 +1,121 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+<div id="content-wrapper">
+
+      <div class="container-fluid">
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><b>+</b> <b>Tambah Data Laboratorium</b></button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Laboratorium</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url_for('tambahlaboratorium') }}" method="POST">
+         <div class="form-row">
+         <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Nama Dokter:</label>
+            <input type="text" class="form-control" id="recipient-name" name="ndokter" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Nama Pasien:</label>
+            <input type="text" class="form-control" id="recipient-name" name="nama" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Usia:</label>
+            <input type="text" class="form-control" id="recipient-name" name="usia" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Jenis Kelamin:</label>
+            <input type="text" class="form-control" id="recipient-name" name="gender" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Status:</label>
+            <input type="text" class="form-control" id="recipient-name" name="status" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Golongan Darah:</label>
+            <input type="text" class="form-control" id="recipient-name" name="goldarah" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Keluhan:</label>
+            <input type="text" class="form-control" id="recipient-name" name="keluhan" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Hasil / Diagnosa:</label>
+            <input type="text" class="form-control" id="recipient-name" name="hasil" required>
+          </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+        <button type="submit" class="btn btn-primary">Tambah</button>
+      </div>
+     </form>
+    </div>
+  </div>
+</div>
+<br /><br />
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Data Laboratorium</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered" id="example" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>No</th>
+					<th>Tanggal</th>
+                    <th>Nama Pasien</th>
+                    <th>Usia</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Status</th>
+                    <th>Golongan Darah</th>
+                    <th>Keluhan</th>
+                    <th>Hasil / Diagnosa</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in container %}
+                  <tr>
+                    <td>{{ data.id }}</td>
+					<td>{{ data.tanggal }}</td>
+                    <td>{{ data.nama }}</td>
+                    <td>{{ data.usia }}</td>
+                    <td>{{ data.gender }}</td>
+                    <td>{{ data.status }}</td>
+                    <td>{{ data.golDarah }}</td>
+                    <td>{{ data.keluhan }}</td>
+                    <td>{{ data.hasil }}</td>
+                    <td>
+					<a class="btn btn-sm btn-primary" href="editlaboratorium/{{data.id}}">Edit</a>
+					<a class="btn btn-sm btn-danger" href="hapuslaboratorium/{{data.id}}">Hapus</a>
+					</td>
+                  </tr>
+				{% endfor %}
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      {% include "footer.html" %}
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+{% endblock %}

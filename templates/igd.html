@@ -1,0 +1,119 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+<div id="content-wrapper">
+
+      <div class="container-fluid">
+        <!-- DataTables Example -->
+        <a class="btn btn-sm btn-success" href="/hasilIGD">Data Pasien IGD >></a>
+        <br><br>
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Data Pasien</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered" id="example" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>No</th>
+					<th>No Rekam Medis</th>
+					<th>Nama Pasien</th>
+                    <th>Alamat</th>
+                    <th>Usia</th>
+                    <th>Tanggal Kunjungan</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in container %}
+                  <tr>
+                    <td>{{ data.id }}</td>
+					<td>{{ data.rm }}</td>
+					<td>{{ data.nama }}</td>
+                    <td>{{ data.alamat }}</td>
+                    <td>{{ data.usia }}</td>
+                    <td>{{ data.tanggal }}</td>
+                    <td><a class="btn btn-sm btn-primary" href="#" data-toggle="modal" data-target="#diag{{ data.id }}" data-whatever="@getbootstrap"><i class="fas fa-pen"></i> Buat Diagnosa Pasien</a>
+                <div class="modal fade exampleModal-modal-xl" id="diag{{data.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-xl" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Data Pasien IGD</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="{{ url_for('tambahigd') }}" method="POST">
+                         <div class="form-row">
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">No Rekam Medis:</label>
+                            <input type="text" class="form-control" name="rem" value="{{data.rm}}" readonly>
+                          </div>
+		                  <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Nama:</label>
+                            <input type="text" class="form-control" name="nama" value="{{data.nama}}" readonly>
+                          </div>
+
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Alamat:</label>
+                            <textarea class="form-control" id="disabledTextArea" name="alamat" readonly>{{data.alamat}}</textarea>
+                          </div>
+		                  <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Usia:</label>
+                            <input type="text" class="form-control" id="disabledTextInput" name="usia" value="{{data.usia}}" readonly>
+                          </div>
+                         <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Tanggal:</label>
+                            <input type="text" class="form-control" id="disabledTextInput" name="tanggal" value="{{data.tanggal}}" readonly>
+                          </div>
+                          <br>
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Pemeriksaan Fisik:</label>
+                            <textarea class="form-control" id="message-text" name="pemfisik" required></textarea>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Diagnosa:</label>
+                            <textarea class="form-control" id="message-text" name="diagnosa" required></textarea>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Tindakan:</label>
+                            <textarea class="form-control" id="message-text" name="tindakan" required></textarea>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Pembuatan Resep:</label>
+                            <textarea class="form-control" id="message-text" name="resep" required></textarea>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Dokter Pemeriksa:</label>
+                            <input type="text" class="form-control" name="dokter" required>
+                          </div>
+						  <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Biaya Dokter:</label>
+                            <input type="text" class="form-control" name="biaya" value="120000" required readonly>
+                          </div>
+                          </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
+                          </div>
+                         </form>
+                        </div>
+                      </div>
+                    </div>
+                    </td>
+                  </tr>
+			   {% endfor %}
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    {% include "footer.html" %}
+  <!-- /#wrapper -->
+{% endblock %}

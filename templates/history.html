@@ -1,0 +1,58 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+<div id="content-wrapper">
+
+      <div class="container-fluid">
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Data History Kasir</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-borderless" id="example" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+					<th>Item / Layanan</th>
+					<th>Qty / Kali</th>
+					<th>Harga Satuan</th>
+                    <th>Total</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in container %}
+                  <tr>
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.tanggal}}</td>
+                    <td>{{ data.item }}</td>
+					<td>{{ data.qty }}</td>
+					<td>{{ "Rp.{:,}".format(data.price) }}</td>
+                    <td>{{ "Rp.{:,}".format(data.total) }}</td>
+                    <td><a class="btn btn-sm btn-danger" href="/hapushistory/{{data.id}}">Hapus</a></td>
+                  </tr>
+				{% endfor %}
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="alert alert-success" role="alert">
+            <p><b>Total Pendapatan: {{ "Rp.{:,}".format(uang) }}</b></p>
+        </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      {% include "footer.html" %}
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+{% endblock %}

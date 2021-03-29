@@ -1,0 +1,115 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+<div id="content-wrapper">
+
+      <div class="container-fluid">
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Data Pasien</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered" id="example" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>No</th>
+					<th>No Rekam Medis</th>
+					<th>Nama Pasien</th>
+                    <th>Alamat</th>
+                    <th>Usia</th>
+					<th>Diagnosa</th>
+                    <th>Tanggal Kunjungan</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for i in igd %}
+                  <tr>
+                    <td>{{ i.id }}</td>
+					<td>{{ i.rm }}</td>
+					<td>{{ i.nama }}</td>
+                    <td>{{ i.alamat }}</td>
+                    <td>{{ i.usia }}</td>
+					<td>{{ i.diagnosa }}</td>
+                    <td>{{ i.tanggal }}</td>
+                    <td><a class="btn btn-sm btn-primary" href="#" data-toggle="modal" data-target="#diag{{ i.id }}" data-whatever="@getbootstrap"><i class="fas fa-pen"></i> Buat Diagnosa Pasien</a>
+                <div class="modal fade exampleModal-modal-xl" id="diag{{i.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-xl" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Data Yang Sudah Terdaftar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="" method="POST">
+                         <div class="form-row">
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">No Rekam Medis:</label>
+                            <input type="text" class="form-control" name="rem" value="{{i.rm}}" readonly>
+                          </div>
+		                  <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Nama:</label>
+                            <input type="text" class="form-control" name="nama" value="{{i.nama}}" readonly>
+                          </div>
+
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Alamat:</label>
+                            <textarea class="form-control" id="disabledTextArea" name="alamat" readonly>{{i.alamat}}</textarea>
+                          </div>
+		                  <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Usia:</label>
+                            <input type="text" class="form-control" id="disabledTextInput" name="usia" value="{{i.usia}}" readonly>
+                          </div>
+                         <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Tanggal:</label>
+                            <input type="text" class="form-control" id="disabledTextInput" name="tanggal" value="{{i.tanggal}}" readonly>
+                          </div>
+                          <br>
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Pemeriksaan Fisik:</label>
+                            <textarea class="form-control" id="message-text" name="pemfisik" required></textarea>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Diagnosa:</label>
+                            <textarea class="form-control" id="message-text" name="diagnosa" required></textarea>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Tindakan:</label>
+                            <textarea class="form-control" id="message-text" name="tindakan" required></textarea>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Pembuatan Resep:</label>
+                            <textarea class="form-control" id="message-text" name="resep" required></textarea>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Dokter Pemeriksa:</label>
+                            <input type="text" class="form-control" name="dokter" required>
+                          </div>
+                          </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
+                          </div>
+                         </form>
+                        </div>
+                      </div>
+                    </div>
+                    </td>
+                  </tr>
+			   {% endfor %}
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    {% include "footer.html" %}
+  <!-- /#wrapper -->
+{% endblock %}

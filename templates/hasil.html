@@ -1,0 +1,80 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+<div id="content-wrapper">
+      <div class="container-fluid">
+   
+<br /><br />
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Data Dokter</div>
+          <div class="card-body">
+            <form action="/cari" method="get" class="w-100 m-0" style="padding-right: 20%;">
+              {{ form.csrf_token }}
+                <div class="input-group-append rounded-left">
+                    {{ form.cari(class="form-control") }}
+                    <button class="btn btn-success btn-sm rounded-right" style="border-radius: 0;" type="submit">Cari</button>
+                </div>
+            </form>
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered" id="example" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>No.Rekam Medis</th>
+                    <th>Nama Pasien</th>
+					<th>Usia</th>
+					<th>Jenis Kelamin</th>
+                    <th>Status</th>
+                    <th>Gol.Darah</th>
+                    <th>Tempat Tanggal Lahir</th>
+					<th>No. KTP / ID</th>
+                    <th>Penanggung Jawab</th>
+                    <th>Alamat</th>
+					<th>Jenis Kamar</th>
+					<th>Biaya</th>
+                    <th>Metode</th>
+                    <th>Waktu Pendaftaran</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for res in result %}
+                  <tr>
+                    <td>{{ res.id }}</td>
+                    <td>{{ 15450 + res.id }}</td>
+                    <td>{{ res.nama}}</td>
+                    <td>{{ res.usia }}</td>
+					<td>{{ res.gender }}</td>
+					<td>{{ res.status }}</td>
+                    <td>{{ res.golDarah }}</td>
+                    <td>{{ res.ttl }}</td>
+					<td>{{ res.ktp }}</td>
+                    <td>{{ res.pJawab }}</td>
+                    <td>{{ res.alamat }}</td>
+					<td>{{ res.jenisKmr }}</td>
+					<td>{{ "Rp.{:,}".format(res.biaya) }}</td>
+                    <td>{{ res.metode }}</td>
+                    <td>{{ res.tanggal }}</td>
+                  </tr>
+				{% endfor %}
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      {% include "footer.html" %}
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+{% endblock %}

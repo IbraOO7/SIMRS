@@ -1,0 +1,113 @@
+{% extends 'index.html' %}
+    
+    {% block body %}
+
+    <div id="content-wrapper">
+
+      <div class="container-fluid">
+          <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><b> + Tambah Iuran Bulanan</b></button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Tambah Iuran</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ url_for('tambahiuran') }}" method="POST">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Jenis Tagihan:</label>
+                <input type="text" class="form-control" id="recipient-name" name="tagihan">
+              </div>
+              
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Jumlah Tagihan:</label>
+                <input type="text" class="form-control" id="recipient-name" name="jumlah">
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Keterangan:</label>
+                <input type="text" class="form-control" id="recipient-name" name="keterangan">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Keluar</button>
+            <button type="submit" class="btn btn-primary">Tambah</button>
+          </div>
+         </form>
+        </div>
+      </div>
+    </div>
+    <br><br />
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Data Table Example</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id="example" class="table table-bordered table-sm" width="100%">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Jenis Tagihan</th>
+                    <th>Jumlah Tagihan</th>
+                    <th>Keterangan</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in container %}
+                  <tr>
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.tagihan }}</td>
+                    <td>{{ "Rp.{:,}".format(data.jumlah) }}</td>
+                    <td>{{ data.keterangan }}</td>
+                    <td>
+                    <a class="btn btn-primary btn-sm" href="#" data-toggle="modal" data-target="#edit{{data.id}}" data-whatever="@getbootstrap">Edit<a>
+                    <div class="modal fade" id="edit{{data.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ubah Iuran</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form action="/editiuran/{{data.id}}" method="POST">
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Jenis Tagihan:</label>
+                                <input type="text" class="form-control" value="{{data.tagihan}}" id="recipient-name" name="tagihan">
+                              </div>
+                              
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Jumlah Tagihan:</label>
+                                <input type="text" class="form-control" value="{{data.jumlah}}" id="recipient-name" name="jumlah">
+                              </div>
+                              <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Keterangan:</label>
+                                <input type="text" class="form-control" value="{{data.keterangan}}" id="recipient-name" name="keterangan">
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Keluar</button>
+                            <button type="submit" class="btn btn-primary">Ubah/button>
+                          </div>
+                         </form>
+                        </div>
+                      </div>
+                    </div>
+                    <a class="btn btn-danger btn-sm" href="/hapusiuran/{{data.id}}">Hapus<a>
+                    </td>
+                  </tr>
+				{% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        {% include "footer.html" %}
+       {% endblock %}

@@ -1,0 +1,217 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+<div id="content-wrapper">
+      <div class="container-fluid">
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><b>+</b> <b>Tambah Daftar Pasien</b></button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Rontgen</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url_for('tambahrawatinap') }}" method="POST">
+         <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Nama Pasien:</label>
+            <input type="text" class="form-control" id="recipient-name" name="nama" required>
+          </div>
+		  <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Usia:</label>
+            <input type="text" class="form-control" id="recipient-name" name="usia" required>
+          </div>
+		  <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Jenis Kelamin:</label>
+            <input type="text" class="form-control" id="recipient-name" name="gender" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Status:</label>
+            <input type="text" class="form-control" id="recipient-name" name="status" required>
+          </div>
+           <div class="form-group col-md-6">
+                    <label for="recipient-name" class="col-form-label">Tempat Tanggal Lahir:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="ttl" required>
+           </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Golongan Darah:</label>
+            <input type="text" class="form-control" id="recipient-name" name="goldarah" required>
+          </div>
+		  <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Nomor KTP / ID:</label>
+            <input type="text" class="form-control" id="recipient-name" name="ktp" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Penanggung Jawab:</label>
+            <input type="text" class="form-control" id="recipient-name" name="pjawab" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Alamat:</label>
+            <input type="text" class="form-control" id="recipient-name" name="alamat" required>
+          </div>
+		  <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Jenis Kamar:</label>
+            <input type="text" class="form-control" id="recipient-name" name="jeniskmr" required>
+          </div>
+		  <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Biaya:</label>
+            <input type="text" class="form-control" id="recipient-name" name="biaya" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Metode Pembayaran:</label>
+            <input type="text" class="form-control" id="recipient-name" name="metode" required>
+          </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+        <button type="submit" class="btn btn-primary">Tambah</button>
+      </div>
+     </form>
+    </div>
+  </div>
+</div>
+<br /><br />
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Data Dokter</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered" id="example" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>No.Rekam Medis</th>
+                    <th>Nama Pasien</th>
+					<th>Usia</th>
+					<th>Jenis Kelamin</th>
+                    <th>Status</th>
+                    <th>Gol.Darah</th>
+                    <th>Tempat Tanggal Lahir</th>
+					<th>No. KTP / ID</th>
+                    <th>Penanggung Jawab</th>
+                    <th>Alamat</th>
+					<th>Jenis Kamar</th>
+					<th>Biaya</th>
+                    <th>Metode</th>
+                    <th>Waktu Pendaftaran</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in container %}
+                  <tr>
+                    <td>{{ data.id }}</td>
+                    <td>{{ 15450 + data.id }}</td>
+                    <td>{{ data.nama}}</td>
+                    <td>{{ data.usia }}</td>
+					<td>{{ data.gender }}</td>
+					<td>{{ data.status }}</td>
+                    <td>{{ data.golDarah }}</td>
+                    <td>{{ data.ttl }}</td>
+					<td>{{ data.ktp }}</td>
+                    <td>{{ data.pJawab }}</td>
+                    <td>{{ data.alamat }}</td>
+					<td>{{ data.jenisKmr }}</td>
+					<td>{{ "Rp.{:,}".format(data.biaya) }}</td>
+                    <td>{{ data.metode }}</td>
+                    <td>{{ data.tanggal }}</td>
+                    <td><a class="btn btn-sm btn-primary" href="#" data-toggle="modal" data-target="#edit{{ data.id }}" data-whatever="@getbootstrap">Edit</a>
+        <div class="modal fade" id="edit{{ data.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Data Rontgen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form action="/editrawatinap/{{ data.id }}" method="POST">
+                 <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="recipient-name" class="col-form-label">Nama Pasien:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="nama" value="{{ data.nama }}" required>
+                  </div>
+		          <div class="form-group col-md-6">
+                    <label for="recipient-name" class="col-form-label">Usia:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="usia" value="{{ data.usia }}" required>
+                  </div>
+		          <div class="form-group col-md-6">
+                    <label for="recipient-name" class="col-form-label">Jenis Kelamin:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="gender" value="{{ data.gender }}" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="recipient-name" class="col-form-label">Status:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="status" value="{{ data.status }}" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="recipient-name" class="col-form-label">Golongan Darah:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="goldarah" value="{{ data.golDarah }}" required>
+                  </div>
+                   <div class="form-group col-md-6">
+                    <label for="recipient-name" class="col-form-label">Tempat Tanggal Lahir:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="ttl" value="{{ data.ttl }}" required>
+                  </div>
+		          <div class="form-group col-md-6">
+                    <label for="recipient-name" class="col-form-label">Nomor KTP / ID:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="ktp" value="{{ data.ktp }}" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="recipient-name" class="col-form-label">Penanggung Jawab:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="pjawab" value="{{ data.pJawab }}" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="recipient-name" class="col-form-label">Alamat:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="alamat" value="{{ data.alamat }}">
+                  </div>
+		          <div class="form-group col-md-6">
+                    <label for="recipient-name" class="col-form-label">Jenis Kamar:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="jeniskmr" value="{{ data.jenisKmr }}" required>
+                  </div>
+		          <div class="form-group col-md-6">
+                    <label for="recipient-name" class="col-form-label">Biaya:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="biaya" value="{{ data.biaya }}" required>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="recipient-name" class="col-form-label">Metode Pembayaran:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="metode" value="{{ data.metode }}" required>
+                  </div>
+                  </div>
+                  </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Keluar</button>
+                        <button type="submit" class="btn btn-primary">Ubah</button>
+                      </div>
+                     </form>
+                    </div>
+                  </div>
+                </div>
+					    <a class="btn btn-sm btn-danger" href="/hapusrawatinap/{{data.id}}">Hapus</a>
+					</td>
+                  </tr>
+				{% endfor %}
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      {% include "footer.html" %}
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+{% endblock %}

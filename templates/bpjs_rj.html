@@ -1,0 +1,65 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+<br /><br />
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Data Pasien</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered" id="example" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>No.Rekam Medis</th>
+                    <th>Nama Pasien</th>
+					<th>Usia</th>
+					<th>Jenis Kelamin</th>
+                    <th>Status</th>
+                    <th>Gol.Darah</th>
+					<th>No. KTP / ID</th>
+                    <th>Penanggung Jawab</th>
+                    <th>Alamat</th>
+					<th>Biaya</th>
+                    <th>Metode</th>
+                    <th>Waktu Pendaftaran</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in container %}
+                  <tr>
+                    <td>{{ data.id }}</td>
+                    <td>{{ 15450 + data.id }}</td>
+                    <td>{{ data.nama}}</td>
+                    <td>{{ data.usia }}</td>
+					<td>{{ data.gender }}</td>
+					<td>{{ data.status }}</td>
+                    <td>{{ data.golDarah }}</td>
+					<td>{{ data.ktp }}</td>
+                    <td>{{ data.pJawab }}</td>
+                    <td>{{ data.alamat }}</td>
+					<td>{{ "Rp.{:,}".format(data.biaya) }}</td>
+                    <td>{{ data.metode }}</td>
+                    <td>{{ data.tanggal }}</td>
+                  </tr>
+				{% endfor %}
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      {% include "footer.html" %}
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+{% endblock %}

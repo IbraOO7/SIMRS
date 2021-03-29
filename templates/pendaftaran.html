@@ -1,0 +1,352 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+<div id="content-wrapper">
+      <div class="container-fluid">
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><b>+</b> <b>Tambah Daftar Pasien</b></button>
+
+<div class="modal fade exampleModal-modal-xl" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Pasien</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url_for('tambahpendaftaran') }}" method="POST">
+         <div class="form-row">
+         <div class="form-group col-md-3">
+            <label for="recipient-name" class="col-form-label">No. Rekam Medis:</label>
+            <input type="text" class="form-control" id="recipient-name" name="rm" required>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="recipient-name" class="col-form-label">Nama Pasien:</label>
+            <input type="text" class="form-control" id="recipient-name" name="nama" required>
+          </div>
+		  <div class="form-group col-md-3">
+            <label for="recipient-name" class="col-form-label">Usia:</label>
+            <input type="text" class="form-control" id="recipient-name" name="usia" required>
+          </div>
+		  <div class="form-group col-md-3">
+            <label for="recipient-name" class="col-form-label">Jenis Kelamin:</label>
+            <select class="custom-select custom-select-md mb-3" name="gender" required>
+              <option selected></option>
+              <option value="Laki - laki">Laki - laki</option>
+              <option value="Perempuan">Perempuan</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="recipient-name" class="col-form-label">Status:</label>
+            <select class="custom-select custom-select-md mb-3" name="status" required>
+              <option selected></option>
+              <option value="Belum Menikah">Belum Menikah</option>
+              <option value="Sudah Menikah">Sudah Menikah</option>
+              <option value="Bercerai">Bercerai</option>
+            </select>
+          </div>
+          <div class="form-group col-sm">
+            <label for="recipient-name" class="col-form-label">Golongan Darah:</label>
+            <select class="custom-select custom-select-md mb-3" name="goldarah" required>
+              <option selected></option>
+              <option value="A">A</option>
+              <option value="AB">AB</option>
+              <option value="B">B</option>
+              <option value="O">O</option>
+            </select>
+          </div>
+           <div class="form-group col-md-3">
+                    <label for="recipient-name" class="col-form-label">Tempat Tanggal Lahir:</label>
+                    <input type="text" class="form-control" id="recipient-name" name="ttl" required>
+           </div>
+		  <div class="form-group col-md-3">
+            <label for="recipient-name" class="col-form-label">Nomor KTP / ID:</label>
+            <input type="text" class="form-control" id="recipient-name" name="ktp" required>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="recipient-name" class="col-form-label">Penanggung Jawab:</label>
+            <select class="custom-select custom-select-md mb-3" name="pjawab" required>
+              <option selected></option>
+              <option value="Diri Sendiri">Diri Sendiri</option>
+              <option value="Orang Tua">Orang Tua</option>
+              <option value="Suami">Suami </option>
+              <option value="Istri">Istri</option>
+              <option value="Saudara / Keluarga">Saudara / Keluarga</option>
+              <option value="Teman / Kerabat">Teman / Kerabat</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="recipient-name" class="col-form-label">Alamat:</label>
+            <textarea class="form-control" id="message-text" name="alamat" required></textarea>
+          </div>
+          <div class="form-group col-md-3">
+          <label for="recipient-name" class="col-form-label">Cara Masuk:</label>
+            <select class="custom-select custom-select-md mb-3" name="kategori" required>
+              <option selected></option>
+              <option value="Umum">Umum</option>
+              <option value="Rawat Jalan">Rawat Jalan</option>
+              <option value="Rawat Inap">Rawat Inap</option>
+              <option value="Emergensi">Emergensi</option>
+              <option value="Rujukan">Rujukan</option>
+            </select>
+           </div>
+		  <div class="form-group col-md-3">
+		  <label for="recipient-name" class="col-form-label">Kamar Rawat / Poliklinik:</label>
+            <select class="custom-select custom-select-md mb-3" name="jeniskmr">
+              <option selected></option>
+              <option value="Kelas III">Kelas III</option>
+              <option value="Kelas II">Kelas II</option>
+              <option value="Kelas I">Kelas I</option>
+              <option value="VIP">VIP</option>
+              <option value="IGD">IGD</option>
+              <option value="Poli Gigi">Poli Gigi</option>
+              <option value="Poli Mata">Poli Mata</option>
+              <option value="Poli Kandungan">Poli Kandungan</option>
+              <option value="Poli Umum">Poli Umum</option>
+              <option value="Poli Anak">Poli Anak</option>
+              <option value="Poli Paru-paru">Poli Paru-paru</option>
+              <option value="Poli Psikologi">Poli Psikologi</option>
+              <option value="Poli Kulit">Poli Kulit</option>
+            </select>
+          </div>
+		  <div class="form-group col-md-3">
+            <label for="recipient-name" class="col-form-label">Biaya:</label>
+            <input type="text" class="form-control" id="recipient-name" name="biaya" required>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="recipient-name" class="col-form-label">Metode:</label>
+            <select class="custom-select custom-select-md mb-3" name="metode" required>
+              <option selected></option>
+              <option value="Umum">Umum</option>
+              <option value="BPJS">BPJS</option>
+              <option value="Perusahaan">Perusahaan</option>
+              <option value="Asuransi">Asuransi</option>
+            </select>
+          </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+        <button type="submit" class="btn btn-primary">Tambah</button>
+      </div>
+     </form>
+    </div>
+  </div>
+</div>
+<br /><br />
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Data Pendaftaran</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered" id="example" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>No.Rekam Medis</th>
+                    <th>Nama Pasien</th>
+					<th>TTL</th>
+					<th>Jenis Kelamin</th>
+					<th>Jenis Kamar / Poli</th>
+                    <th>Metode</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in container %}
+                  <tr>
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.rm }}</td>
+                    <td>{{ data.nama}}</td>
+					<td>{{ data.ttl }}</td>
+					<td>{{ data.gender }}</td>
+					<td>{{ data.jenisKmr }}</td>
+                    <td>{{ data.metode }}</td>
+                    <td><button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#example1{{data.id}}" data-whatever="@getbootstrap"><i class="fas fa-eye"></i></button>
+                        <div class="modal fade exampleModal-modal-lg" id="example1{{data.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Detail Data Pasien</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form action="" method="POST">
+                                 <div class="form-row">
+                                  <div class="form-group col-md-3">
+                                    <label for="recipient-name" class="col-form-label"><b>Nama Pasien:</b> {{data.nama}}</label>
+                                  </div>
+		                          <div class="form-group col-md-3">
+                                    <label for="recipient-name" class="col-form-label"><b>Usia:</b> {{data.usia}}</label>
+                                  </div>
+		                          <div class="form-group col-md-3">
+                                    <label for="recipient-name" class="col-form-label"><b>Jenis Kelamin:</b> {{data.gender}}</label>
+                                  </div>
+                                  <div class="form-group col-md-3">
+                                    <label for="recipient-name" class="col-form-label"><b>Status:</b> {{data.status}}</label>
+                                  </div>
+                                  <div class="form-group col-md-3">
+                                    <label for="recipient-name" class="col-form-label"><b>Golongan Darah:</b> {{data.golDarah}}</label>
+                                  </div>
+                                   <div class="form-group col-md-3">
+                                    <label for="recipient-name" class="col-form-label"><b>Tempat Tanggal Lahir:</b> {{data.ttl}}</label>
+                                   </div>
+		                          <div class="form-group col-md-3">
+                                    <label for="recipient-name" class="col-form-label"><b>Nomor KTP / ID:</b> {{data.ktp}}</label>
+                                  </div>
+                                  <div class="form-group col-md-3">
+                                    <label for="recipient-name" class="col-form-label"><b>Penanggung Jawab:</b> {{data.pJawab}}</label>
+                                  </div>
+                                  <div class="form-group col-md-3">
+                                    <label for="recipient-name" class="col-form-label"><b>Alamat:</b> {{data.alamat}}</label>
+                                  </div>
+                                  <div class="form-group col-md-3">
+                                  <label for="recipient-name" class="col-form-label"><b>Cara Masuk:</b> {{data.kategori}}</label>
+                                   </div>
+		                          <div class="form-group col-md-3">
+		                          <label for="recipient-name" class="col-form-label"><b>Kamar Rawat / Poliklinik:</b> {{data.jenisKmr}}</label>
+                                  </div>
+		                          <div class="form-group col-md-3">
+                                    <label for="recipient-name" class="col-form-label"><b>Biaya:</b> {{"Rp.{:,}".format(data.biaya)}}</label>
+                                  </div>
+                                  <div class="form-group col-md-3">
+                                    <label for="recipient-name" class="col-form-label"><b>Metode:</b> {{data.metode}}</label>
+                                  </div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+                                <button type="#" class="btn btn-primary">Export PDF</button>
+                              </div>
+                             </form>
+                            </div>
+                          </div>
+                        </div>
+                    <a class="btn btn-sm btn-primary" href="#" data-toggle="modal" data-target="#edit{{ data.id }}" data-whatever="@getbootstrap"><i class="fas fa-pen"></i></a>
+                <div class="modal fade exampleModal-modal-xl" id="edit{{data.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-xl" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Data Yang Sudah Terdaftar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="/editpendaftaran/{{data.id}}" method="POST">
+                         <div class="form-row">
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Nama Pasien:</label>
+                            <input type="text" class="form-control" id="recipient-name" name="nama" value="{{data.nama}}" required>
+                          </div>
+		                  <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Usia:</label>
+                            <input type="text" class="form-control" id="recipient-name" name="usia" value="{{data.usia}}" required>
+                          </div>
+		                  <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Jenis Kelamin:</label>
+                            <select class="custom-select custom-select-md mb-3" name="gender" required>
+                              <option selected>{{data.gender}}</option>
+                              <option value="Laki - laki">Laki - laki</option>
+                              <option value="Perempuan">Perempuan</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Status:</label>
+                            <select class="custom-select custom-select-md mb-3" name="status" required>
+                              <option selected>{{data.status}}</option>
+                              <option value="Belum Menikah">Belum Menikah</option>
+                              <option value="Sudah Menikah">Sudah Menikah</option>
+                              <option value="Bercerai">Bercerai</option>
+                            </select>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Golongan Darah:</label>
+                            <input type="text" class="form-control" id="recipient-name" name="goldarah" value="{{data.golDarah}}" required>
+                          </div>
+                           <div class="form-group col-md-3">
+                                    <label for="recipient-name" class="col-form-label">Tempat Tanggal Lahir:</label>
+                                    <input type="text" class="form-control" id="recipient-name" name="ttl" value="{{data.ttl}}" required>
+                           </div>
+		                  <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Nomor KTP / ID:</label>
+                            <input type="text" class="form-control" id="recipient-name" name="ktp" value="{{data.ktp}}" required>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Penanggung Jawab:</label>
+                            <input type="text" class="form-control" id="recipient-name" name="pjawab" value="{{data.pJawab}}" required>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Alamat:</label>
+                            <textarea class="form-control" id="message-text" name="alamat" required>{{data.alamat}}</textarea>
+                          </div>
+                          <div class="form-group col-md-3">
+                          <label for="recipient-name" class="col-form-label">Kategori:</label>
+                            <select class="custom-select custom-select-md mb-3" name="kategori" required>
+                              <option selected>{{data.kategori}}</option>
+                              <option value="Umum">Umum</option>
+                              <option value="Rawat Jalan">Rawat Jalan</option>
+                              <option value="Rawat Inap">Rawat Inap</option>
+                            </select>
+                           </div>
+		                  <div class="form-group col-md-3">
+		                  <label for="recipient-name" class="col-form-label">Kamar:</label>
+                            <select class="custom-select custom-select-md mb-3" name="jeniskmr">
+                              <option selected>{{data.jenisKmr}}</option>
+                              <option value="Kelas III">Kelas III</option>
+                              <option value="Kelas II">Kelas II</option>
+                              <option value="Kelas I">Kelas I</option>
+                              <option value="VIP">VIP</option>
+                            </select>
+                          </div>
+		                  <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Biaya:</label>
+                            <input type="text" class="form-control" id="recipient-name" name="biaya" value="{{data.biaya}}" required>
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label for="recipient-name" class="col-form-label">Metode:</label>
+                            <select class="custom-select custom-select-md mb-3" name="metode" required>
+                              <option selected>{{data.metode}}</option>
+                              <option value="Umum">Umum</option>
+                              <option value="BPJS">BPJS</option>
+                              <option value="Perusahaan">Perusahaan</option>
+                              <option value="Asuransi">Asuransi</option>
+                            </select>
+                          </div>
+                          </div>
+                      </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
+                          </div>
+                         </form>
+                        </div>
+                      </div>
+                    </div>
+					    <a class="btn btn-sm btn-danger" href="/hapuspendaftaran/{{data.id}}"><i class="fas fa-trash"></i></a>
+					</td>
+                  </tr>
+				{% endfor %}
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      {% include "footer.html" %}
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+{% endblock %}

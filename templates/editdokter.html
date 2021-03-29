@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+<br><br>
+	<div class="card mb-3">
+	<div class="card-header">
+      <i class="fas fa-table"></i>
+       Data Dokter</div>
+      <div class="card-body">
+	<form action="/editdokter/{{data.id}}" method="POST">
+	  <div class="form-row">
+		<div class="form-group col-md-6">
+		  <label for="inputEmail4">Nama Dokter:</label>
+		  <input type="text" class="form-control" id="inputEmail4" name="nama" value="{{data.nama}}" placeholder="Nama" required>
+		</div>
+		<div class="form-group col-md-6">
+		  <label for="inputPassword4">Alamat:</label>
+		  <input type="text" class="form-control" id="inputPassword4" name="alamat" value="{{ data.alamat }}" placeholder="Alamat" required>
+		</div>
+	  <div class="form-group col-md-6">
+		  <label for="inputPassword4">No.Telepon:</label>
+		  <input type="text" class="form-control" id="inputPassword4" name="nohp" value="{{ data.noHP }}" placeholder="No.Telepon" required>
+		</div>
+	  <div class="form-group col-md-6">
+		  <label for="inputPassword4">Spesialis:</label>
+		  <input type="text" class="form-control" id="inputPassword4" name="spesialis" value="{{ data.spesialis }}" placeholder="Spesialis" required>
+		</div>
+	  <div class="form-group col-md-6">
+		  <label for="message-text" class="col-form-label">Jadwal:</label>
+		  <textarea class="form-control" id="message-text" name="jadwal" value="{{ data.jadwal }}" required></textarea>
+	   </div>
+	  <div class="form-group col-md-6">
+		  <label for="inputPassword4">Keterangan:</label>
+		  <input type="text" class="form-control" id="inputPassword4" name="keterangan" value="{{ data.keterangan }}" placeholder="Password" required>
+		</div>
+	  </div>
+	  <button type="submit" class="btn btn-primary">Ubah</button>
+	</form>
+   </div>
+  </div>
+  {% include "footer.html" %}
+  
+{% endblock %}

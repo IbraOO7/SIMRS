@@ -1,0 +1,155 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Custom fonts for this template-->
+  <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+	<link href="static/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="static/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
+	<link href="static/css/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
+	<link href="static/css/jquery-ui.css" rel="stylesheet" type="text/css">
+    <link href="static/css/sb-admin.css" rel="stylesheet">
+        <script type="text/javascript" src="{{ url_for('static', filename='jquery-1.12.4.js') }}"></script>
+        <title>RS Firdaus</title>
+        <link href="static/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="static/jautocalc.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+
+                function autoCalcSetup() {
+                    $('form[name=cart]').jAutoCalc('destroy');
+                    $('form[name=cart] tr[name=line_items]').jAutoCalc({keyEventsFire: true, decimalPlaces: 2, emptyAsZero: true});
+                    $('form[name=cart]').jAutoCalc({decimalPlaces: 2});
+                }
+                autoCalcSetup();
+
+
+                $('button[name=remove]').click(function(e) {
+                    e.preventDefault();
+
+                    var form = $(this).parents('form')
+                    $(this).parents('tr').remove();
+                    autoCalcSetup();
+
+                });
+
+                $('button[name=add]').click(function(e) {
+                    e.preventDefault();
+
+                    var $table = $(this).parents('table');
+                    var $top = $table.find('tr[name=line_items]').first();
+                    var $new = $top.clone(true);
+
+                    $new.jAutoCalc('destroy');
+                    $new.insertBefore($top);
+                    $new.find('input[type=text]').val('');
+                    autoCalcSetup();
+
+                });
+
+            });
+        //-->
+        </script>
+        <style>
+        body { font-family: 'Roboto'; background-color: #f7f7f7; }
+        .container { margin: 15px auto; }
+        #myInput {
+          background-position: 10px 10px;
+          background-repeat: no-repeat;
+          width: 30%;
+          font-size: 16px;
+          padding: 5px 5px 5px 10px;
+          border: 1px solid #ddd;
+          margin-bottom: 10px;
+        }
+    </style>
+    </head>
+    <body id="page-top">
+    
+    {% include "sidebar.html" %}
+    
+       {% block body %}
+        <div class="container">
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+             <b>Obat</b></div>
+          <div class="card-body">
+        <br>
+           <form action="{{ url_for('tambahkasir') }}" name="cart" method="POST">
+            <table id="myTable" name="cart" class="table table-striped table-sm table-bordered">
+                <tr class="header">
+                    <th></th>
+                    <th>Item / Nama Barang</th>
+                    <th>Harga Satuan</th>
+                    <th>Qty</th>
+                    <td>&nbsp;</td>
+                    <th>Harga Total</th>
+                </tr>
+                <tr name="line_items">
+                    <td><button name="remove" class="btn btn-danger">Hapus</button></td>
+                    <td><input type="text" id="Obat" name="item" value="" required></td>
+                    <td><input type="text" id="Result" name="price" value="" required></td>
+                    <td><input type="number" name="qty" value="" required></td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" name="item_total" value="" jAutoCalc="{qty} * {price}" required></td>
+                </tr>
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                    <td>Subtotal</td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" name="sub_total" value="" jAutoCalc="SUM({item_total})"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                    <td>
+                        Tax:
+                        <select name="tax">
+                            <option value=".06">CT Tax</option>
+                            <option selected value=".00">Tax Free</option>
+                        </select>
+                    </td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" name="tax_total" value="" jAutoCalc="{sub_total} * {tax}"></td>
+                </tr>
+                <tr>
+                    <td colspan="3">&nbsp;</td>
+                    <td>Total</td>
+                    <td>&nbsp;</td>
+                    <td><input type="text" name="grand_total" value="" jAutoCalc="{sub_total} + {tax_total}"></td>
+                </tr>
+                <tr>
+                    <td colspan="99"><button name="add"  class="btn btn-primary">Tambah Belanja</button> <button type="submit"  class="btn btn-success">Simpan</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+     </div>
+      </div>
+       </div>
+       </div>
+       </div>
+       {% include "footer.html" %}
+    </body>
+    {% endblock %}
+  <!-- Core plugin JavaScript-->
+    <script src="static/js/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="static/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- Custom scripts for all pages-->
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-36251023-1']);
+      _gaq.push(['_setDomainName', 'jqueryscript.net']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+</html>

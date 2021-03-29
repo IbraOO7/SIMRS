@@ -1,0 +1,42 @@
+Beberapa kategori yang ada pada aplikasi sistem informasi manajemen rumah sakit ini :
+
+# Kategori pengguna Front Office memiliki fungsi-fungsi :
+– Menampilkan Daftar Pasien
+– Menambah Data Pasien
+– Mengubah Data Pasien
+– Menghapus Data Pasien
+– Pencarian Pasien berdasarkan Semua Kolom Tabel yang Ditampilkan
+– Pencarian Data Pasien berdasarkan nama atau ID Pasien
+– Menampilkan Data Pasien Rawat Jalan
+– Menambahkan Data Pasien Rawat Jalan
+– Mengubah Data Pasien Rawat Jalan
+– Menghapus Data Pasien Rawat Jalan
+– Menampilkan Status Pembayaran Pasien Rawat Jalan
+– Pencarian Pasien Rawat Jalan berdasarkan Semua Kolom Tabel yang Ditampilkan
+– Menampilkan Data Pasien Rawat Inap
+– Menambah Data Pasien Rawat Inap
+– Mengubah Data Pasien Rawat Inap
+– Menghapus Data Pasien Rawat Inap
+– Pencarian Pasien Rawat Jalan berdasarkan Semua Kolom Tabel yang Ditampilkan
+– Menampilkan Tarif Rawat Inap Sesuai Pelayanan, Perawatan dan Tipe Kamar
+– Menampilkan Tarif Rawat Jalan Sesuai Departemen
+
+# Kategori pengguna petugas departemen memiliki fungsi-fungsi :
+– Menampilkan Data Pasien Rawat Jalan Sesuai Departemen
+– Pencarian Pasien Rawat Jalan Sesuai Departemen berdasarkan Semua Kolom Tabel yang Ditampilkan
+– Memilih Dokter yang Akan Menangani Pasien Rawat Jalan
+– Menampilkan Status Pemeriksaan Pasien
+– Menampilkan Data Dokter
+– Pencarian Dokter berdasarkan Semua Kolom Tabel yang Ditampilkan
+
+# Kategori pengguna Dokter memiliki fungsi-fungsi :
+– Menampilkan Data Pasien Berdasarkan Dokter Pemeriksa
+– Pencarian Pasien berdasarkan Semua Kolom Tabel yang Ditampilkan
+– Pencarian Data Pasien berdasarkan nama atau ID Pasien
+– Mengisi Hasil Diagnosa Pasien dan Menentukan Tindakan Selanjutnya
+– Menampilkan Data Resep Dokter berdasarkan Nama Dokter
+– Menambah Data Resep
+– Mengubah Data Resep
+– Menghapus Data Resep
+– Pencarian Resep berdasarkan Semua Kolom Tabel yang Ditampilkan
+– Mencetak Resep

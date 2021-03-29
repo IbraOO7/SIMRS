@@ -1,0 +1,163 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+<div id="content-wrapper">
+
+      <div class="container-fluid">
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><b>+</b> <b>Tambah Obat</b></button>
+
+<div class="modal fade exampleModal-modal-xl" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Obat</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url_for('tambahobat') }}" method="POST">
+        <div class="form-row">
+		<div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Tanggal Beli:</label>
+            <input type="date" class="form-control" id="recipient-name" name="tanggal" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Jenis Obat:</label>
+            <input type="text" class="form-control" id="recipient-name" name="jenisobat" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Nama Obat:</label>
+            <input type="text" class="form-control" id="recipient-name" name="namaobat" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Harga Beli:</label>
+            <input type="text" class="form-control" id="recipient-name" name="hBeli" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Expired:</label>
+            <input type="date" class="form-control" id="recipient-name" name="exp" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Status Jual:</label>
+            <input type="text" class="form-control" id="recipient-name" name="ready" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Satuan:</label>
+            <input type="text" class="form-control" id="recipient-name" name="satuan" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Stok:</label>
+            <input type="text" class="form-control" id="recipient-name" name="stok" required>
+          </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+        <button type="submit" class="btn btn-primary">Tambah</button>
+      </div>
+     </form>
+    </div>
+  </div>
+</div>
+<br /><br />
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Data Obat</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered" id="example" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>No</th>
+					<th>Waktu Beli</th>
+					<th>Kode Obat</th>
+                    <th>Nama Obat</th>
+                    <th>Harga Beli</th>
+                    <th>Harga Jual</th>
+                    <th>Stok</th>
+                    <th>Sisa</th>
+                    <th>Satuan</th>
+                    <th>Expired</th>
+                    <th><center>Aksi</center></th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in container %}
+                  <tr>
+                    <td>{{ data.id }}</td>
+					<td>{{ data.tanggal }}</td>
+					<td>{{ "O0{}".format(data.id)}}</td>
+                    <td>{{ data.namaObat }}</td>
+                    <td>{{ "Rp.{:,}".format(data.hBeli) }}</td>
+                    <td>{{"Rp.{:,}".format(data.hJual) }}</td>
+                    <td>{{ data.stok }}</td>
+                    <td>{{ data.sisa }}</td>
+                    <td>{{ data.satuan }}</td>
+                    <td>{{ data.exp }}</td>
+                    <td>
+                    <a class="btn btn-sm btn-primary" href="#" data-toggle="modal" data-target="#edit{{ data.id }}" data-whatever="@getbootstrap"><i class="fas fa-pen"></i></a>
+
+                    <div class="modal fade" id="edit{{ data.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Obat</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <form action="/editobat/{{ data.id }}" method="POST">
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="recipient-name" class="col-form-label">Tanggal:</label>
+                                <input type="date" class="form-control" value="{{ data.tanggal }}" id="recipient-name" name="tanggal" required>
+                              </div>
+                               <div class="form-group col-md-6">
+                                <label for="recipient-name" class="col-form-label">Nama Obat:</label>
+                                <input type="text" class="form-control" value="{{ data.namaObat }}" id="recipient-name" name="namaObat" required>
+                              </div>
+                              <div class="form-group col-md-6">
+                                <label for="recipient-name" class="col-form-label">Stok:</label>
+                                <input type="text" class="form-control" value="{{ data.stok }}" id="recipient-name" name="stok" required>
+                              </div>
+                              <div class="form-group col-md-6">
+                                <label for="recipient-name" class="col-form-label">Satuan:</label>
+                                <input type="text" class="form-control" value="{{ data.satuan }}" id="recipient-name" name="satuan" required>
+                              </div>
+                              <div class="form-group col-md-6">
+                                <label for="recipient-name" class="col-form-label">Harga:</label>
+                                <input type="text" class="form-control" value="{{ data.harga }}" id="recipient-name" name="harga" required>
+                              </div>
+                              <div class="form-group col-md-6">
+                                <label for="recipient-name" class="col-form-label">Keterangan:</label>
+                                <input type="text" class="form-control" value="{{ data.keterangan }}" id="recipient-name" name="keterangan" required>
+                              </div>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+                            <button type="submit" class="btn btn-primary">Tambah</button>
+                          </div>
+                         </form>
+                        </div>
+                      </div>
+                    </div> 
+                    <a class="btn btn-sm btn-danger" href="/hapusobat/{{data.id}}"><i class="fas fa-trash"></i></a>
+                    </td>
+                  </tr>
+			   {% endfor %}
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    {% include "footer.html" %}
+  <!-- /#wrapper -->
+{% endblock %}

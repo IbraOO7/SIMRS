@@ -1,0 +1,91 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+	<div id="content-wrapper">
+
+		  <div class="container-fluid">
+			<button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><b>+</b> <b>Tambah Faktur</b></button>
+
+	<div class="modal fade exampleModal-modal-md" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title" id="exampleModalLabel">Tambah Faktur</h5>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <div class="modal-body">
+			<form action="{{ url_for('tambahpengadaan') }}" method="POST">
+			<div class="form-row">
+			<div class="form-group col-md-6">
+				<label for="recipient-name" class="col-form-label">No. Faktur:</label>
+				<input type="text" class="form-control" id="recipient-name" name="nfaktur" required>
+			  </div>
+			  <div class="form-group col-md-6">
+				<label for="recipient-name" class="col-form-label">Tanggal Pembelian:</label>
+				<input type="date" class="form-control" id="recipient-name" name="tgl" required>
+			  </div>
+			  <div class="form-group col-md-6">
+				<label for="recipient-name" class="col-form-label">Suplier:</label>
+				<input type="text" class="form-control" id="recipient-name" name="suplier" required>
+			  </div>
+			  <div class="form-group col-md-6">
+				<label for="recipient-name" class="col-form-label">No Telepon:</label>
+				<input type="text" class="form-control" id="recipient-name" name="nohp" required>
+			  </div>
+			  <div class="form-group col-md-6">
+				<label for="recipient-name" class="col-form-label">Alamat:</label>
+				<input type="text" class="form-control" id="recipient-name" name="alamat" required>
+			  </div>
+			  </div>
+		  </div>
+		  <div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+			<button type="submit" class="btn btn-primary">Tambah</button>
+		  </div>
+		 </form>
+		</div>
+	  </div>
+	</div>
+	<br><br>
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Data Suplier Obat</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered" id="example" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>No</th>
+					<th>Nomor Faktur</th>
+                    <th>Tanggal Pembelian</th>
+                    <th>Suplier</th>
+					<th>No.Telepon</th>
+					<th>Alamat</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for co in cont %}
+                  <tr>
+                    <td>{{ co.id }}</td>
+					<td>{{ co.nFaktur }}</td>
+                    <td>{{ co.tgl }}</td>
+                    <td>{{ co.suplier }}</td>
+					<td>{{ co.noHp }}</td>
+					<td>{{ co.alamat }}</td>
+                  </tr>
+			   {% endfor %}
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    {% include "footer.html" %}
+  <!-- /#wrapper -->
+{% endblock %}

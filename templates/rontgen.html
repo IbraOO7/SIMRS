@@ -1,0 +1,174 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+<div id="content-wrapper">
+
+      <div class="container-fluid">
+        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><b>+</b> <b>Tambah Rontgen</b></button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Data Rontgen</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ url_for('tambahrontgen') }}" method="POST">
+         <div class="form-row">
+         <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Nama Dokter:</label>
+            <input type="text" class="form-control" id="recipient-name" name="ndokter" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Nama Pasien:</label>
+            <input type="text" class="form-control" id="recipient-name" name="npasien" required>
+          </div>
+		  <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Usia:</label>
+            <input type="text" class="form-control" id="recipient-name" name="usia" required>
+          </div>
+		  <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Jenis Kelamin:</label>
+            <input type="text" class="form-control" id="recipient-name" name="gender" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Diagnosa:</label>
+            <input type="text" class="form-control" id="recipient-name" name="diagnosa" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Nama Petugas:</label>
+            <input type="text" class="form-control" id="recipient-name" name="npetugas" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="recipient-name" class="col-form-label">Jenis Pemeriksaan:</label>
+            <input type="text" class="form-control" id="recipient-name" name="keterangan" required>
+          </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+        <button type="submit" class="btn btn-primary">Tambah</button>
+      </div>
+     </form>
+    </div>
+  </div>
+</div>
+<br /><br />
+        <!-- DataTables Example -->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fas fa-table"></i>
+            Data Dokter</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-sm table-bordered" id="example" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Tanggal</th>
+                    <th>No.Rekam Medis</th>
+                    <th>Dokter Pemeriksa</th>
+                    <th>Nama Pasien</th>
+					<th>Usia</th>
+					<th>Jenis Kelamin</th>
+                    <th>Diagnosa</th>
+                    <th>Petugas</th>
+                    <th>Jenis Pemeriksaan</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for data in container %}
+                  <tr>
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.tanggal }}</td>
+                    <td>{{ 15450 + data.id }}</td>
+                    <td>{{ data.nDokter }}</td>
+                    <td>{{ data.npasien }}</td>
+					<td>{{ data.usia }}</td>
+					<td>{{ data.gender }}</td>
+                    <td>{{ data.diagnosa }}</td>
+                    <td>{{ data.npetugas }}</td>
+                    <td>{{ data.keterangan }}</td>
+                    <td><a class="btn btn-sm btn-primary" href="#" data-toggle="modal" data-target="#edit{{ data.id }}" data-whatever="@getbootstrap">Edit</a>
+                        <div class="modal fade" id="edit{{ data.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Rontgen</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <form action="/editrontgen/{{ data.id }}" method="POST">
+                                 <div class="form-row">
+                                 <div class="form-group col-md-6">
+                                    <label for="recipient-name" class="col-form-label">Nama Dokter:</label>
+                                    <input type="text" class="form-control" id="recipient-name" value="{{data.nDokter}}" name="ndokter" required>
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="recipient-name" class="col-form-label">Nama Pasien:</label>
+                                    <input type="text" class="form-control" value="{{data.npasien}}" id="recipient-name" name="npasien" required>
+                                  </div>
+		                          <div class="form-group col-md-6">
+                                    <label for="recipient-name" class="col-form-label">Usia:</label>
+                                    <input type="text" class="form-control" value="{{data.usia}}" id="recipient-name" name="usia">
+                                  </div>
+		                          <div class="form-group col-md-6">
+                                    <label for="recipient-name" class="col-form-label">Jenis Kelamin:</label>
+                                    <input type="text" class="form-control" value="{{data.gender}}" id="recipient-name" name="gender" required>
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="recipient-name" class="col-form-label">Diagnosa:</label>
+                                    <input type="text" class="form-control" value="{{data.diagnosa}}" id="recipient-name" name="diagnosa" required>
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="recipient-name" class="col-form-label">Nama Petugas:</label>
+                                    <input type="text" class="form-control" value="{{data.npetugas}}" id="recipient-name" name="npetugas" required>
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label for="recipient-name" class="col-form-label">Keterangan:</label>
+                                    <input type="text" class="form-control" value="{{data.keterangan}}" id="recipient-name" name="keterangan" required>
+                                  </div>
+                                  </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+                                <button type="submit" class="btn btn-primary">Ubah</button>
+                              </div>
+                             </form>
+                            </div>
+                          </div>
+                        </div>
+					    <a class="btn btn-sm btn-danger" href="/hapusrontgen/{{data.id}}">Hapus</a>
+					</td>
+                  </tr>
+				{% endfor %}
+               </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+
+      <!-- Sticky Footer -->
+      <footer class="sticky-footer">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright © Your Website 2019</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+    <!-- /.content-wrapper -->
+
+  </div>
+  <!-- /#wrapper -->
+{% endblock %}
